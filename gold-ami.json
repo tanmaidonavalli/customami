@@ -23,14 +23,8 @@
 
   "provisioners": [
     {
-      "type": "file",
-      "source": "./file1.txt",
-      "destination": "/home/ubuntu/"
-    },
-
-    {
       "type": "shell",
-      "scripts": ["install.sh"],
+      "scripts": ["/tmp/install.sh"],
       "execute_command": "{{ .Vars }} sudo -E sh '{{ .Path }}'",
       "pause_before": "10s"
     }
