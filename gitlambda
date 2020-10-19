@@ -5,6 +5,7 @@ import subprocess
 import os
 from botocore.exceptions import ClientError
 
+ssm = boto3.client('ssm')
 download_dir = '/tmp/'
 ssm_value = ssm.get_parameter(Name='GITHUB_TOKEN', WithDecryption=True)
 GITHUB_EMAIL = os.environ['GITHUB_EMAIL']
