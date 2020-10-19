@@ -1,0 +1,25 @@
+from __future__ import print_function
+import boto3
+import io
+import subprocess
+import os
+from botocore.exceptions import ClientError
+
+GITHUB_EMAIL = os.environ['GITHUB_EMAIL']
+GITHUB_USERNAME = os.environ['GITHUB_USERNAME']
+GITHUB_REPO = os.environ['GITHUB_REPO']
+GITHUB_TOKEN = os.environ['GITHUB_TOKEN']
+download_dir = '/tmp/'
+       
+def run(command):
+    print(command)
+    process = subprocess.call(command, shell=True, cwd='/tmp')
+    
+def lambda_handler(event, context):
+    commands = (
+        'rm -rf /tmp/*',
+        f"git clone https://{GITHUB_USERNAME}:{GITHUB_TOKEN}@github.com/{GITHUB_USERNAME}/{GITHUB_REPO}.git . ",
+        "ls /tmp"
+    )
+    for command in commands:
+        run(command)
